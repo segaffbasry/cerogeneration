@@ -1,0 +1,66 @@
+/* Header: frameless (no bar or box). html[data-header] follows what is underneath: "dark" = white type. */
+.site-header { position: fixed; inset: 0 0 auto; z-index: 90; height: var(--header-h); color: var(--navy); transition: transform .5s var(--ease), color .35s var(--ease); pointer-events: none; }
+html[data-header="dark"] .site-header { color: var(--white); }
+.site-header.is-hidden { transform: translateY(-110%); }
+.site-header-inner { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+.site-header a, .site-header button { pointer-events: auto; }
+.brand { display: inline-flex; }
+.brand .logo { width: clamp(92px, 7.6vw, 112px); height: auto; overflow: visible; }
+.header-actions { display: flex; align-items: center; gap: clamp(14px, 2vw, 32px); }
+.header-links { display: flex; gap: clamp(18px, 2vw, 32px); font-size: 16px; font-weight: 500; }
+.menu-toggle { display: inline-flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; padding: 10px 0; }
+.menu-lines { display: grid; gap: 6px; width: 26px; }
+.menu-lines i { display: block; height: 1.5px; background: currentColor; transition: transform .35s var(--ease); }
+.menu-lines i:last-child { width: 70%; margin-left: auto; }
+.menu-toggle:hover .menu-lines i:last-child { transform: scaleX(1.43); transform-origin: right; }
+@media (max-width: 1040px) { .header-links { display: none; } }
+@media (max-width: 560px) { .header-cta { display: none; } }
+
+/* Full-screen menu: Ink ground with the Sun ring turning once, oversized, in the corner (the cover graphic of
+   Cero's own Code of Conduct). */
+.menu { position: fixed; inset: 0; z-index: 120; visibility: hidden; background: var(--ink); color: var(--white); overflow-y: auto; overflow-x: clip; display: flex; flex-direction: column; }
+.menu-swirl { position: absolute; right: -14vmax; bottom: -16vmax; width: 52vmax; aspect-ratio: 1; background: var(--navy); -webkit-mask: url("/media/swirl.svg") center / contain no-repeat; mask: url("/media/swirl.svg") center / contain no-repeat; pointer-events: none; }
+.menu-top, .menu-body { position: relative; }
+.menu-top { height: var(--header-h); display: flex; align-items: center; justify-content: space-between; flex: none; }
+.menu-close { display: inline-flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; padding: 10px 0; }
+.menu-x { position: relative; width: 22px; height: 22px; }
+.menu-x::before, .menu-x::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1.5px; background: currentColor; transform: rotate(45deg); }
+.menu-x::after { transform: rotate(-45deg); }
+.menu-body { flex: 1; display: grid; grid-template-columns: 1.3fr 1fr; gap: clamp(32px, 6vw, 96px); padding-block: clamp(24px, 5vh, 64px); align-content: center; }
+.menu-label { font-size: var(--fs-small); color: var(--sun); margin-bottom: 14px; }
+.menu-page li a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: clamp(5px, .9vh, 9px) 0; font-size: clamp(28px, 3.6vw, 48px); font-weight: 500; line-height: 1.05; letter-spacing: -.025em; transition: color var(--dur-btn) var(--ease-btn); }
+.menu-page li a .arrow { width: 18px; height: 18px; opacity: 0; transform: translateX(-8px); transition: opacity var(--dur-btn) var(--ease-btn), transform .45s var(--ease); }
+.menu-page li a:hover, .menu-page li a:focus-visible { color: var(--sun); }
+.menu-page li a:hover .arrow, .menu-page li a:focus-visible .arrow { opacity: 1; transform: none; }
+.menu-side { display: grid; gap: 32px; align-content: center; }
+.menu-site { display: grid; gap: 8px; font-size: clamp(18px, 1.5vw, 21px); }
+.menu-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px 24px; flex-wrap: wrap; font-size: 15px; color: var(--on-dark); }
+@media (max-width: 860px) { .menu-body { grid-template-columns: 1fr; align-content: start; } }
+
+/* Footer: Ink ground. */
+.site-footer { background: var(--ink); color: var(--on-dark); padding-block: clamp(56px, 6vw, 80px) 28px; font-size: 15px; }
+.footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.4fr; gap: 40px 32px; }
+.footer-about { display: grid; gap: 20px; align-content: start; max-width: 40ch; }
+.footer-logo { color: var(--white); justify-self: start; }
+.footer-logo .logo { width: clamp(130px, 11vw, 160px); height: auto; }
+.footer-note { justify-self: start; color: var(--white); }
+.footer-label { font-size: var(--fs-small); font-weight: 600; color: var(--sun); margin-bottom: 14px; letter-spacing: 0; }
+.footer-col ul { display: grid; gap: 8px; }
+.footer-col a:hover, .footer-col a:focus-visible { color: var(--white); }
+.footer-bar { margin-top: clamp(40px, 5vw, 64px); padding-top: 24px; border-top: 1px solid color-mix(in srgb, var(--white) 14%, transparent); display: flex; justify-content: space-between; align-items: center; gap: 16px 32px; flex-wrap: wrap; font-size: var(--fs-small); }
+@media (max-width: 1000px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } .footer-about { grid-column: 1 / -1; } }
+@media (max-width: 560px) { .footer-grid { grid-template-columns: 1fr 1fr; } .footer-col:last-child { grid-column: 1 / -1; } .footer-col:last-child ul { display: block; columns: 2; column-gap: 24px; } .footer-col:last-child li { break-inside: avoid; margin-bottom: 8px; } }
+
+/* Loading screen (components/Preloader.tsx): Ink ground, the hero veil's own colour, so the handover shows no jump. */
+.preloader { position: fixed; inset: 0; z-index: 150; display: none; pointer-events: none; }
+html.is-loading .preloader, html.is-landing .preloader { display: grid; place-items: center; }
+html.is-loading { overflow: hidden; }
+.preloader-ground { position: absolute; inset: 0; display: grid; place-items: center; background: var(--ink); clip-path: inset(0 0 0 0); }
+.preloader-sign { position: relative; visibility: hidden; color: var(--white); }
+.preloader .logo { width: clamp(180px, 22vw, 320px); height: auto; overflow: visible; }
+.preloader .logo [data-part="c"], .preloader .logo [data-part="e"], .preloader .logo [data-part="r"], .preloader .logo [data-part="o"] { transform-box: fill-box; }
+.preloader-meta { position: absolute; left: 0; right: 0; bottom: clamp(20px, 4vh, 44px); margin-inline: auto; display: flex; align-items: end; justify-content: space-between; gap: 24px; color: var(--white); opacity: 0; }
+.preloader-line { font-size: var(--fs-small); line-height: 1.45; color: var(--on-dark); padding-bottom: .5em; }
+.preloader-count { font-size: clamp(52px, 8vw, 120px); font-weight: 500; line-height: .8; letter-spacing: -.04em; font-variant-numeric: tabular-nums; color: var(--sun); }
+/* Nothing of the page shows before the loader paints: the hero copy and header wait under it. */
+html.is-loading .site-header, html.is-landing .site-header .brand { visibility: hidden; }
