@@ -21,7 +21,8 @@ for f in 2025/09/Pontinia-Slider.jpg 2025/09/Delfini-Slider.jpg 2025/09/Castrum-
 for f in 2025/07/Image-1_1.jpg 2025/07/Image-1_2.jpg 2025/07/Image-1_3.jpg 2025/07/Image-1_4.jpg 2025/07/Logo-01.png 2025/07/Logo-02.png 2025/07/Logo-03.png 2025/09/2.jpg; do get $f; done
 # Brand vectors (scripts/logo.py reads page 1)
 get 2026/04/Cero-Code-of-Conduct-A5-web.pdf
-# Project pages: hero collage
+# Project pages: hero collage, case-study cards, the ring-masked photo; /landowners
+for f in 2024/04/Pontinia-Solar-Project-3.jpg 2024/04/Larks-Green-Solar-Project.jpg 2024/04/Larks-Green-Solar-Project-2.jpg 2023/02/Bolo-B-1-2-scaled.jpg 2025/06/Castrum-1.png 2025/09/6-scaled.jpg; do get $f; done
 for f in 2024/04/Pontinia-Solar-Project.jpg 2024/04/Delfini-Solar-Project.jpg 2024/04/Larks-Green-Solar-Project.jpg 2023/02/Bolo-B-1-2-scaled.jpg 2025/07/ALEXPARKYNSMITHLARKSFINALSELECTION-63-1.jpg 2025/09/Cero-Generation.jpg; do get $f; done
 
 GRADE="eq=saturation=0.94"
@@ -38,8 +39,20 @@ photo Image-1_1.jpg identify.jpg 1280
 photo Image-1_2.jpg develop.jpg 1280
 photo Image-1_3.jpg construct.jpg 1280
 photo Image-1_4.jpg operate.jpg 1280
-# Case studies (the live homepage slider images)
-for p in Pontinia Delfini Castrum Bolotana Larks-Green; do photo $p-Slider.jpg case-$(echo $p | tr A-Z a-z).jpg 1600; done
+# Case studies: each project page's own lead photo (taller than the homepage's 2.4:1 slider strips, which suit
+# the portrait cards badly)
+photo Pontinia-Solar-Project.jpg case-pontinia.jpg 1400
+photo Delfini-Solar-Project.jpg case-delfini.jpg 1400
+photo Castrum-1.png case-castrum.jpg 1400
+photo Bolo-B-1-2-scaled.jpg case-bolotana.jpg 1400
+photo Larks-Green-Solar-Project.jpg case-larks-green.jpg 1400
+# About: the photo seen through the Cero ring (Pontinia panels against the sky)
+photo Pontinia-Solar-Project-3.jpg ring-photo.jpg 1400
+# Landowners banner (Larks Green from the air) and careers banner (careers site gallery, Cero site team)
+photo Larks-Green-Solar-Project-2.jpg landowners.jpg 1600
+TT=https://images.teamtailor-cdn.com/images/s3/teamtailor-production/gallery_picture-v6/image_uploads
+[ -s "$RAW/careers-team.jpg" ] || curl -sL "$TT/1f638f1f-8122-4159-b9c3-4e02d42eb649/original.jpeg" -o "$RAW/careers-team.jpg"
+photo careers-team.jpg careers.jpg 1200
 # News
 photo 26.jpg news-bumble-bee.jpg 1000
 photo financing-package-for-a-portfolio-of-UK-solar-and-BESS-co-located-assets.jpg news-financing.jpg 1000

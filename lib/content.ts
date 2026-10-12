@@ -23,7 +23,7 @@ export const hero = {
 
 // Homepage: h3 + first paragraph; they rise in under the collage.
 export const intro = {
-  title: ["Cero Generation is quickly becoming", "one of Europe’s leading renewable energy producers."],
+  title: "Cero Generation is quickly becoming one of Europe’s leading renewable energy producers.",
   body: "We’re focused on developing and delivering utility-scale solar and battery energy storage system (BESS) projects that power the transition to a cleaner, more resilient energy system.",
 };
 
@@ -33,6 +33,8 @@ export const about = {
   owner: "Cero Generation is a Macquarie Asset Management (MAM) portfolio company, operating on a stand-alone basis.",
   reel: { src: `${M}/reel.mp4`, poster: `${M}/reel-poster.jpg`, label: "Watch the Cero film" }, // live: uploads/2025/07/About-Us-Reel-3.mp4
   cta: { label: "What we do", href: `${LIVE}/what-we-do/` },
+  // Seen through the Cero ring: Pontinia's panels against the sky (/project/pontinia).
+  ringPhoto: `${M}/ring-photo.jpg`,
   // Figures restate the homepage copy and the reel's own captions ("teams working across 8 different European countries").
   figures: [
     { value: 6, label: "Projects in operation" },
@@ -44,7 +46,7 @@ export const about = {
 
 // /what-we-do "Our expertise": the four stages with their own photographs, in the live order.
 export const expertise = {
-  title: ["Our", "expertise"],
+  title: "Our expertise",
   lede: "We identify, develop, build and operate solar energy and battery storage projects.",
   cta: { label: "Cero overview", href: `${LIVE}/what-we-do/` },
   steps: [
@@ -91,7 +93,7 @@ export const bumbleBee: Project = {
 
 // /projects h1, split for the two-tone heading.
 export const footprint = {
-  title: ["We’re operating utility scale solar and battery energy storage projects", "across Europe."],
+  title: "We’re operating utility scale solar and battery energy storage projects across Europe.",
   cta: { label: "Our projects", href: `${LIVE}/projects/` },
 };
 
@@ -107,7 +109,7 @@ export const partners = {
 
 // Homepage "Latest news": the same four posts, newest first (dates from each post's datePublished).
 export const news = {
-  title: ["Latest", "news"],
+  title: "Latest news",
   all: { label: "More news stories", href: `${LIVE}/newsroom/` },
   posts: [
     { title: "Cero Generation reaches financial close on 198 MW Bumble Bee Co-Located Renewable Energy Project at West Burton", date: "2026-02-23", img: `${M}/news-bumble-bee.jpg`,
@@ -120,6 +122,20 @@ export const news = {
       href: `${LIVE}/cero-generation-launches-the-first-transmission-connected-co-located-solar-and-battery-storage-facility-at-larks-green/` },
   ],
 };
+
+/* Review 1 (2026-10-11): "could we add something for landowners? or maybe careers banner?" Both, side by side.
+   Landowners: /landowners h1 and its first paragraph. Careers: the Teamtailor careers site's "Working with us" and
+   its three values, word for word. */
+export const paths = [
+  { id: "landowners", title: "A partner to power success.", label: "Working with landowners",
+    body: "In rural settings, our solar projects are perfectly placed for dual use, such as grazing livestock or increasing biodiversity.",
+    points: ["Arranging land lease", "Community consultations", "Planning applications"],
+    img: `${M}/landowners.jpg`, cta: { label: "Landowners", href: `${LIVE}/landowners/` } },
+  { id: "careers", title: "Working with us", label: "Cero Careers",
+    body: "Our shared culture is all about doing the right thing for our company, our people and the world around us.",
+    points: ["Collaborative & Accountable", "Ambitious & Impactful", "Courageous & Caring"],
+    img: `${M}/careers.jpg`, cta: { label: "Job openings", href: "https://cerogeneration-1674220216.teamtailor.com/" } },
+];
 
 // Project pages' closing band, "Ready to discuss a project?", with the /contact page's own heading as its line.
 export const contact = {

@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import "@/components/motion";
-import { Button, TwoTone, reducedMotion } from "@/components/ui";
+import { Button, reducedMotion } from "@/components/ui";
 import { hero, intro } from "@/lib/content";
 
 /* THE COPIED INTERACTION (README "Copied interaction"): virya-energy.com's hero, blocks/hero.js `animateAboveTablet`,
@@ -190,7 +190,7 @@ export function Hero() {
         </div>
       </div>
       <div className="hero-desc">
-        <h2 className="h2 hero-desc-title"><TwoTone parts={intro.title} /></h2>
+        <h2 className="h2 hero-desc-title">{intro.title}</h2>
         <p className="lede">{intro.body}</p>
       </div>
     </div>

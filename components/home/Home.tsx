@@ -6,6 +6,7 @@ import { Expertise } from "@/components/home/Expertise";
 import { Footprint } from "@/components/home/Footprint";
 import { Hero } from "@/components/home/Hero";
 import { News } from "@/components/home/News";
+import { Paths } from "@/components/home/Paths";
 
 /* The homepage, in order (README "Page structure"): an Ink opening (preloader and film), then a steady white page
    with Mist bands; no scroll-driven recolouring (house rule). */
@@ -17,6 +18,7 @@ export function Home() {
     <Expertise />
     <Footprint />
     <CaseStudies />
+    <Paths />
     <News />
     <Contact />
   </>;

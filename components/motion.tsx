@@ -81,8 +81,8 @@ export function usePageMotion() {
       const all = (kind: string) => gsap.utils.toArray<HTMLElement>(`[data-reveal="${kind}"]:not([data-hero] [data-reveal])`);
 
       all("label").forEach((el) => {
-        gsap.set(el, { autoAlpha: 0, y: 12 });
-        ScrollTrigger.create({ trigger: el, start: "top 92%", once: true, onEnter: () => gsap.to(el, { autoAlpha: 1, y: 0, duration: timing.label * scale(el), ease: "cero", clearProps: "transform" }) });
+        gsap.set(el, { opacity: 0, y: 12 });
+        ScrollTrigger.create({ trigger: el, start: "top 92%", once: true, onEnter: () => gsap.to(el, { opacity: 1, y: 0, duration: timing.label * scale(el), ease: "cero", clearProps: "transform" }) });
       });
 
       all("heading").forEach((el) => {
@@ -105,8 +105,9 @@ export function usePageMotion() {
       });
 
       const cards = all("card");
-      gsap.set(cards, { autoAlpha: 0, y: timing.rise });
-      ScrollTrigger.batch(cards, { start: "top 92%", once: true, onEnter: (batch) => gsap.to(batch, { autoAlpha: 1, y: 0, duration: timing.card * scale(batch[0]), ease: "cero", stagger: timing.cardStagger * scale(batch[0]), overwrite: true, clearProps: "transform" }) });
+      // opacity, never visibility: hidden, so links and buttons in unrevealed cards stay in the keyboard tab order.
+      gsap.set(cards, { opacity: 0, y: timing.rise });
+      ScrollTrigger.batch(cards, { start: "top 92%", once: true, onEnter: (batch) => gsap.to(batch, { opacity: 1, y: 0, duration: timing.card * scale(batch[0]), ease: "cero", stagger: timing.cardStagger * scale(batch[0]), overwrite: true, clearProps: "transform" }) });
 
       all("image").forEach((el) => {
         gsap.set(el, { clipPath: "inset(100% 0% 0% 0%)" });

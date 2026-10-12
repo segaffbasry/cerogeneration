@@ -66,12 +66,26 @@ Header: logo + a hamburger that opens a full-screen popup menu (Home, What we do
 | Preloader | Every load (house rule: loaders must be noticed), about 2.3s, with a counter |
 | Typography | Rethink Sans for UI and display (Effra substitute, above) |
 | PostHog key | The standing Regen EU key (`lib/posthog.ts`), overridable with `NEXT_PUBLIC_POSTHOG_KEY` |
-| Slug / domain | Not given; Vercel and `{slug}.regendigital.co` are a separate step |
+| Slug / domain | `cero` (proposed demo URL in the brief: cero.regendigital.co). Vercel is a separate step |
 
 **Reference conflicts, resolved:**
 - The brief allows per-character effects only in the preloader and hero; the client asked for on.energy's text animation, which is a per-character blur. It is used on **section headings only**; paragraphs use on.energy's calmer line fade.
 - faers.tech pins a scroll-scrubbed film for many screens. House rule: only the hero may pin, so faers contributes the statement and the button, not its pinned film.
 - Virya's section padding is 120 to 180px; the house spacing scale caps it at 88px.
+
+## Review 1 (11 Oct 2026)
+
+Client feedback on the first version, and what changed:
+
+| Feedback | Change |
+|---|---|
+| "Clean up text colours, I don't want half blue and half green, in title and in the boxes" | Two-tone headings are gone: every heading is one colour (Navy on light, white on dark). The figure boxes, the case-study capacities in Teal and the Teal "Read more" links are gone too. Teal now only marks map pins and focus rings. The hero's second line keeps Sun on the film (the client singled the hero out as working). |
+| "Not sure on all this white space we have" (About) | About rebuilt as two full columns: the statement, MAM line, button and a row of four figures on the left; on the right, a Pontinia photo seen through Cero's own ring. The reel moves under them as a wide 21:9 band, so no grid cell is left empty. |
+| "Too much text here" (map) | The six-row site list and its labels are gone. The map sits on an inset Ink panel with the heading, two totals and the filters. The sites are now links on the map itself, and each opens a card with the project's photo. |
+| "Overall it's nice, but I don't think it's standing out in comparison to theirs; the header and first scroll to image collage is nice, it's the rest of the page" | Hero and collage unchanged. Below them: the ring-masked photo; the expertise stages as expanding photo panels; case studies as tall photo cards with white type, the summary sliding up on hover; the map on a dark panel. Awwwards reference: Sunsure Energy (nominee, a solar IPP), which crops its photography into its logo shape. That idea became the Cero ring mask. |
+| "Could we add something for landowners? Or maybe careers banner?" | Both, as a pair of photo banners (`Paths.tsx`). Landowners: the /landowners heading "A partner to power success.", its first line and its three steps. Careers: the Teamtailor careers site's "Working with us" line and Cero's three values, with "Job openings". Added to the menu as "Landowners and careers". |
+
+Also fixed in this round: card and button reveals now animate opacity only, never `visibility: hidden`, so links inside cards that haven't revealed yet stay in the keyboard tab order.
 
 ## Page structure and pacing
 
@@ -80,32 +94,36 @@ Eight blocks, image-led at the top: an Ink opening (preloader and film), then a 
 | # | Section | Component | Imagery |
 |---|---|---|---|
 | 1 | Hero: film shrinks into a card among five photos; the intro rises underneath | `Hero.tsx` | brand film + 5 photos |
-| 2 | About: lit statement, the reel, "Cero in a few numbers" | `About.tsx` | About Us reel |
-| 3 | Our expertise: four stages as tabs with their photos | `Expertise.tsx` | 4 photos |
-| 4 | Across Europe: dot map, totals, filters, site list | `Footprint.tsx` | map |
-| 5 | Case studies slider + PPA partners | `CaseStudies.tsx` | 5 photos + 3 logos |
-| 6 | Latest news | `News.tsx` | 4 post images |
-| 7 | Contact: "Ready to discuss a project?" + six offices | `Contact.tsx` | aerial photo |
-| 8 | Footer | `chrome.tsx` | |
+| 2 | About: lit statement, four figures, a photo inside the Cero ring, the reel as a wide band | `About.tsx` | ring photo + About Us reel |
+| 3 | Our expertise: four expanding photo panels | `Expertise.tsx` | 4 photos |
+| 4 | Across Europe: dot map on an Ink panel, two totals, filters, photo cards on the pins | `Footprint.tsx` | map + 6 project photos |
+| 5 | Case studies: tall photo cards + PPA partners | `CaseStudies.tsx` | 5 photos + 3 logos |
+| 6 | Landowners and careers banners | `Paths.tsx` | 2 photos |
+| 7 | Latest news | `News.tsx` | 4 post images |
+| 8 | Contact: "Ready to discuss a project?" + six offices | `Contact.tsx` | aerial photo |
+| 9 | Footer | `chrome.tsx` | |
 
 **Page height** (production build, `document.documentElement.scrollHeight`):
 
 | Width × height | Total | Viewport heights |
 |---|---|---|
-| 1440 × 900 | 7,505px (includes the 990px hero pin) | 8.3 |
-| 768 × 1024 | 9,119px | 8.9 |
-| 375 × 812 | 8,615px | 10.6 (single column; news becomes a compact list on phones) |
+| 1440 × 900 | 8,370px (includes the 990px hero pin) | 9.3 |
+| 768 × 1024 | 9,935px | 9.7 |
+| 375 × 812 | 9,127px | 11.2 (single column; news becomes a compact list on phones) |
+
+Round 1 measured 8.3 screens at 1440. Review 1 added the landowners and careers banners the client asked for and gave the reel its own band, which together add about one screen. The map lost its list (about 300px) to compensate.
 
 ## Content counts: live homepage vs this build
 
 | Section | Live | Here | Note |
 |---|---|---|---|
 | Hero | film + h1 | same + "What we do" and "Our projects" buttons | The buttons mirror Virya's two-button hero. |
-| About | h3, 3 paragraphs, reel, CTA | all of it | h3 + first paragraph rise under the collage; the other two are the lit statement and the Navy card. |
+| About | h3, 3 paragraphs, reel, CTA | all of it | h3 + first paragraph rise under the collage; the other two are the lit statement and the line under it. |
 | Figures | none | 4 | Restate the copy (6 operating, 6 under construction), the reel's caption (teams in 8 European countries) and `/contact` (6 offices). |
 | Our expertise (from `/what-we-do`) | not on the homepage | 4 stages, 4 photos | Gives the homepage the "what we do" story the live one only links to. |
-| Across Europe (from `/projects` + newsroom) | not on the homepage | 6 sites, 6 offices, 2 totals | The signature data visual. Bumble Bee comes from the Feb 2026 release (no project page yet; it links to the release). |
-| Case studies | 5 | 5 | Same projects, same order, same slider images. |
+| Across Europe (from `/projects` + newsroom) | not on the homepage | 6 sites (map pins with photo cards), 6 offices, 2 totals | The signature data visual. Bumble Bee comes from the Feb 2026 release (no project page yet; it links to the release). The list of sites was dropped in review 1. |
+| Case studies | 5 | 5 | Same projects and order. Since review 1 each card uses its project page's lead photo: the homepage's 2.4:1 slider strips don't fit portrait cards. |
+| Landowners and careers (from `/landowners`, careers site) | not on the homepage | 2 banners | Added at the client's request (review 1). |
 | PPA partners (from `/what-we-do`) | not on the homepage | line + 3 logos | |
 | Latest news | 4 (+ Load More) | 4 | "More news stories" goes to `/newsroom/`. |
 | Contact | not on the homepage (on project pages) | title, line, 2 CTAs, 6 offices | Kept out of the footer (house rule). |
@@ -157,9 +175,11 @@ All play once, from `components/motion.tsx`; inside `[data-late]` sections (news
 
 **Buttons** (`components/ui.tsx`, `styles/ui.css`): Virya's c-button (18px radius, .3s ease-out, scale .97 on hover) with faers.tech's arrow chip (the arrow slides out of its circle while a twin slides in).
 
-**Expertise tabs:** auto-advance every 6s while on screen, driven by the Teal progress line's own tween; stop for good once the visitor picks, hovers or focuses one; arrow keys, Home and End (WAI-ARIA tabs).
+**Expertise panels:** hover, focus or click opens a panel (the name is a button with `aria-expanded`). The open one widens (flex-grow, .8s power3.out) and its text fades up. The closed strips turn their names upright. Arrow keys, Home and End move between panels. On phones the panels stack and the open one grows taller.
 
-**Across Europe:** `scripts/map.mjs` projects Natural Earth 1:50m (conic conformal) into a dot grid and places pins by town and office coordinates. Hover or focus a row or pin to open its card; chips filter. Halo size follows capacity. Operational sites are Teal, Bumble Bee (financial close) Sun, offices Navy.
+**Ring mask (About):** `public/media/swirl.svg` (the cover ring from the Code of Conduct) is a CSS mask over a photograph. While the section scrolls past, the ring turns from -12° to 12° (scrubbed) and the photo counter-turns so it stays upright.
+
+**Across Europe:** `scripts/map.mjs` projects Natural Earth 1:50m (conic conformal) into a dot grid and places pins by town and office coordinates. The pins are real links laid over the map. Hovering or focusing one opens a card with the project's photo, place and capacity (it flips left near the right edge). Chips filter the map. Halo size follows capacity. Operational sites are Teal, Bumble Bee (financial close) Sun, offices white.
 
 **Films:** the hero film is muted with a pause control, starts after handover and pauses off-screen; the poster is a local frame. The reel keeps its sound, so it starts only on "Watch the Cero film" and pauses when it leaves the screen.
 
@@ -168,8 +188,8 @@ All play once, from `components/motion.tsx`; inside `[data-late]` sections (news
 - Reduced motion: no preloader, no smooth scroll, no pin; everything visible in place (checked: 0 hidden reveal targets).
 - No JS: the `js`/`is-loading` classes are never added, so nothing starts hidden; `<noscript>` hides the preloader.
 - Split text keeps a visually hidden copy of the plain sentence for screen readers; the split spans are `aria-hidden`.
-- Keyboard: skip link, visible Teal/Sun focus rings, menu focus trap, tab keys on the expertise tabs. Checked with a scripted keyboard run.
-- Contrast: body Ink on white; muted text 5.5:1; Sun buttons carry Ink type; Teal is used for large headings and pins only (4.3:1, large-text AA).
+- Keyboard: skip link, visible Teal/Sun focus rings, menu focus trap, expertise panels and map pins reachable and operable (map cards open on focus). Checked with a scripted keyboard run.
+- Contrast: body Ink on white; muted text 5.5:1; Sun buttons carry Ink type; white type on photos always sits on an Ink shade (stronger on phones, where the text block is taller). Teal carries no text.
 
 ## Private-demo settings
 
@@ -192,7 +212,10 @@ All from cerogeneration.com uploads, via `scripts/media.sh` (natural colour, sat
 | `reel.mp4`, `reel-poster.jpg` | `2025/07/About-Us-Reel-3.mp4` (homepage About); poster is the frame at 2s |
 | `collage-*.jpg` | `2025/09/2.jpg`, `ALEXPARKYNSMITH…-63-1.jpg` (what-we-do); `Delfini-Solar-Project.jpg`, `Pontinia-Solar-Project.jpg` (project pages); `Larks-Green-BESS.jpg` (news) |
 | `identify/develop/construct/operate.jpg` | `2025/07/Image-1_1…4.jpg` (what-we-do) |
-| `case-*.jpg` | `2025/09/*-Slider.jpg` (homepage case studies) |
+| `case-*.jpg` | each project page's lead photo: `Pontinia-Solar-Project.jpg`, `Delfini-Solar-Project.jpg`, `Castrum-1.png`, `Bolo-B-1-2-scaled.jpg`, `Larks-Green-Solar-Project.jpg` |
+| `ring-photo.jpg` | `2024/04/Pontinia-Solar-Project-3.jpg` (project page) |
+| `landowners.jpg` | `2024/04/Larks-Green-Solar-Project-2.jpg` (project page) |
+| `careers.jpg` | the careers site gallery (Teamtailor CDN), Cero site team |
 | `news-*.jpg` | the four homepage post images |
 | `contact.jpg` | `2025/09/Cero-Generation.jpg` |
 | `partner-1…3.png` | `2025/07/Logo-01…03.png` (what-we-do), printed Navy by CSS mask |

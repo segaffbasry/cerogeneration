@@ -28,9 +28,3 @@ export function Button({ href, children, tone = "sun", className = "", reveal = 
 export function SocialIcon({ icon, size = 18 }: { icon: BrandIcon; size?: number }) {
   return <svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" focusable="false"><path d={brandIcons[icon]} fill="currentColor" /></svg>;
 }
-
-/* Two-tone headline (Virya: "Our <span>expertise</span>", the second phrase muted). Here the second phrase takes
-   Teal on light grounds and Sun on dark ones (styles/ui.css .tone). */
-export function TwoTone({ parts }: { parts: string[] }) {
-  return <>{parts[0]}{parts[1] && <>{" "}<span className="tone">{parts[1]}</span></>}</>;
-}

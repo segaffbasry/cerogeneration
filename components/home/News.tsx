@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Arrow, Button, TwoTone, linkProps } from "@/components/ui";
+import { Arrow, Button, linkProps } from "@/components/ui";
 import { formatDate, news } from "@/lib/content";
 
 /* Latest news: the live homepage's four posts, newest first. Cards after Virya's latest-news block: photo, date,
@@ -8,7 +8,7 @@ export function News() {
   return <section className="section news" id="news" tabIndex={-1} aria-labelledby="news-title" data-late>
     <div className="wrap">
       <div className="section-head">
-        <h2 className="h2" id="news-title" data-reveal="heading"><TwoTone parts={news.title} /></h2>
+        <h2 className="h2" id="news-title" data-reveal="heading">{news.title}</h2>
         <Button href={news.all.href} tone="ink">{news.all.label}</Button>
       </div>
       <ul className="news-grid">

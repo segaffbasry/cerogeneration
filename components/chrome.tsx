@@ -15,6 +15,7 @@ const onPage = [
   { label: "Our expertise", href: "#expertise" },
   { label: "Across Europe", href: "#projects" },
   { label: "Case studies", href: "#case-studies" },
+  { label: "Landowners and careers", href: "#work-with-us" },
   { label: "Latest news", href: "#news" },
   { label: "Contact", href: "#contact" },
 ];
